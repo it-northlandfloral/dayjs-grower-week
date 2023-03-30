@@ -1,0 +1,16 @@
+{
+  "name": "dayjs-grower-week",
+  "version": "1.0.0",
+  "description": "Grower week plugin for dayjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dayjs",
+    "growerweek",
+    "floral"
+  ],
+  "author": "Jake Tigchelaar",
+  "license": "ISC"
+}
