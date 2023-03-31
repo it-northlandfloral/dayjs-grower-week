@@ -13,7 +13,7 @@ Custom DayJS plugin that handles floral grower weeks
 
 ## Installation
 ```bash
-npm install 
+npm install northlandfloral/dayjs-grower-week
 ```
 
 ## Usage
@@ -28,6 +28,12 @@ dayjs('2023-01-25').growerWeek() // 4
 ```javascript
 // sets the grower week
 dayjs('2023-01-25').growerWeek(52) // dayjs object 2023-12-27
+```
+
+### Get the Grower Week Year
+```javascript
+// get the grower week year
+dayjs('2023-01-25').growerWeekYear() // 2023
 ```
 
 ### Get Start of Grower Week
@@ -46,7 +52,7 @@ dayjs('2023-01-25').endOf('growerWeek') // dayjs object 2023-01-28 23:59:59
 ```javascript
 // requires isLeapYear plugin
 //returns the current grower week year
-dayjs('2023-01-25').growerWeekYear() // 52
+dayjs('2023-01-25').growerWeeksInYear() // 52
 ```
 
 ### Format Grower Week
@@ -57,5 +63,6 @@ dayjs('2023-01-25').growerWeekYear() // 52
 ```javascript
 // formats the grower week
 dayjs('2023-01-25').format('gw') // 4
+dayjs('2023-01-25').format('gww') // 04
 dayjs('2023-01-25').format('gy') // 2023
 ```
