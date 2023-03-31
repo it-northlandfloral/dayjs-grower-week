@@ -1,31 +1,29 @@
-import { D, W, Y } from 'dayjs/esm/constant'
-
-export default (option, dayjsClass, dayjsFactory) => {
+const growerWeek = (option, dayjsClass, dayjsFactory) => {
   const weekDecidingDay = 4 // Thursday
   
   const getYearFirst = (year, isUtc) => {
-    const yearFirstDay = (isUtc ? dayjsFactory.utc : dayjsFactory)().year(year).startOf(Y)
+    const yearFirstDay = (isUtc ? dayjsFactory.utc : dayjsFactory)().year(year).startOf('year')
     let addDiffDays = weekDecidingDay - yearFirstDay.day()
     if (yearFirstDay.day() > weekDecidingDay) {
       addDiffDays += 7
     }
-    return yearFirstDay.add(addDiffDays, D)
+    return yearFirstDay.add(addDiffDays, 'day')
   }
 
   // gets the current week deciding day 
   const getCurrentWeekDecidingDay = (curDay) => {
-    return curDay.add((weekDecidingDay - curDay.day()), D)
+    return curDay.add((weekDecidingDay - curDay.day()), 'day')
   }
 
   dayjsClass.prototype.growerWeek = function(week) {
     // handle setting grower week
     if (week !== undefined) {
-      return this.add((week - this.growerWeek()) * 7, D)
+      return this.add((week - this.growerWeek()) * 7, 'day')
     }
       
     const nowWeek = getCurrentWeekDecidingDay(this)
     const diffWeek = getYearFirst(this.growerWeekYear(), this.$u)
-    return nowWeek.diff(diffWeek, W) + 1
+    return nowWeek.diff(diffWeek, 'week') + 1
   }
 
   dayjsClass.prototype.growerWeekYear = function() {
@@ -73,11 +71,16 @@ export default (option, dayjsClass, dayjsFactory) => {
 
   dayjsClass.prototype.growerWeeksInYear = function() {
     const isLeapYear = this.isLeapYear()
-    const last = this.endOf('y')
+    const last = this.endOf('year')
     const day = last.day()
     if (day === 4 || (isLeapYear && day === 5)) {
       return 53
     }
     return 52
   }
+}
+
+module.exports = {
+  growerWeek,
+  default: growerWeek,
 }
