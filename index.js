@@ -69,6 +69,21 @@ const growerWeek = (option, dayjsClass, dayjsFactory) => {
     return oldFormat.bind(this)(result)
   }
 
+  const oldParse = dayjsClass.prototype.parse;
+  dayjsClass.prototype.parse = function(cfg) {
+    const {date, args} = cfg
+
+    if (typeof date === 'string' && args?.[1] === 'gygww') {
+      const year = parseInt(date.substring(0, 4));
+      const week = parseInt(date.substring(4, 6));
+      const diffWeek = getYearFirst(year, this.$u)
+      this.$d = diffWeek.add(week - 1, 'weeks').toDate()
+      this.init()
+    } else {
+      oldParse.call(this, cfg)
+    }
+  }
+
   dayjsClass.prototype.growerWeeksInYear = function() {
     const isLeapYear = this.isLeapYear()
     const last = this.endOf('year')

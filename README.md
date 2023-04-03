@@ -66,3 +66,8 @@ dayjs('2023-01-25').format('gw') // 4
 dayjs('2023-01-25').format('gww') // 04
 dayjs('2023-01-25').format('gy') // 2023
 ```
+
+### Parse Grower Week
+```javascript
+dayjs('202304', 'gygww') // dayjs object 2023-01-25 0:00:00
+```
