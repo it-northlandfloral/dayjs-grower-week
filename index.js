@@ -73,9 +73,9 @@ const growerWeek = (option, dayjsClass, dayjsFactory) => {
   dayjsClass.prototype.parse = function(cfg) {
     const {date, args} = cfg
 
-    if (typeof date === 'string' && args?.[1] === 'gygww') {
-      const year = parseInt(date.substring(0, 4));
-      const week = parseInt(date.substring(4, 6));
+    if (args?.[1] === 'gygww') {
+      const year = parseInt(date.toString().substring(0, 4));
+      const week = parseInt(date.toString().substring(4, 6));
       const diffWeek = getYearFirst(year, this.$u)
       this.$d = diffWeek.add(week - 1, 'weeks').toDate()
       this.init()
